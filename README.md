@@ -1,5 +1,26 @@
 # gas-line-bot-template.ts
 
+## Architecture
+
+```mermaid
+graph LR
+  subgraph main
+    client
+    application
+    persistence
+  end
+  subgraph adaptor
+    client-adaptor
+    persistence-adaptor
+  end
+
+  client -.-> application -.-> persistence
+  client --> client-adaptor
+  application --> client-adaptor
+  application --> persistence-adaptor
+  persistence --> persistence-adaptor
+```
+
 ## Requirement
 
 ```bash

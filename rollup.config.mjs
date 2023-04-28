@@ -17,7 +17,7 @@ const preventThreeShakingPlugin = () => {
   }
 
 export default {
-  input: "./src/index.ts",
+  input: "./src/client/gas/index.ts",
   output: {
     dir: "build",
     format: "esm",
