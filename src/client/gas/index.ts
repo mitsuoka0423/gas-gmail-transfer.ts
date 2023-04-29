@@ -12,10 +12,14 @@ if (!DISCORD_WEBHOOK_URL) {
   throw new Error("DiscordのWebhook URLが未設定です");
 }
 
+const LINE_NOTIFY_TOKEN =
+  PropertiesService.getScriptProperties().getProperty("LINE_NOTIFY_TOKEN");
+
 const main = async () => {
   await adaptor({
     GMAIL_QUERY_FROM,
     DISCORD_WEBHOOK_URL,
+    LINE_NOTIFY_TOKEN,
   });
 
   console.log("finished");
