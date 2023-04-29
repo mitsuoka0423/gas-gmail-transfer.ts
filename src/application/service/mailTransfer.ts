@@ -34,7 +34,7 @@ export const execute = async ({
 	try {
 		await notify({
 			webhookUrl: discord.webhookUrl,
-			content: `メールが届きました\n${message}`,
+			content: message,
 		});
 	
 		threadList.forEach((thread) => {
