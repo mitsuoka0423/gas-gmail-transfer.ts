@@ -2,6 +2,7 @@ import { Email } from './Email';
 
 export interface Thread {
   id: string;
-  emails: Email[];
+  unreadEmails: Email[];
+  latestEmail: Email;
   url: string;
 }

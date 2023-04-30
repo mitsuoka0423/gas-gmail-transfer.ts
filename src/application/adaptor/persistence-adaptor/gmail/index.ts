@@ -9,10 +9,11 @@ export const query = (query: string): Thread[] => {
 
 const convertGmailThread2Thread = (gmailThread): Thread => {
   const messages = gmailThread.getMessages();
-  const emails = messages.map(convertGmailMessage2Email);
+  const unreadEmails = messages.filter(message => message.isUnread()).map(convertGmailMessage2Email);
   return {
     id: gmailThread.getId(),
-    emails,
+    unreadEmails,
+    latestEmail: unreadEmails[unreadEmails.length - 1],
     url: gmailThread.getPermalink(),
   };
 };
