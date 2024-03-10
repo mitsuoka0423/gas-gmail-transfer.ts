@@ -12,7 +12,17 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "npm ci && npm i -g clasp"
+	"postCreateCommand": "npm ci && npm i -g clasp",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"github.vscode-github-actions",
+				"YoavBls.pretty-ts-errors",
+				"esbenp.prettier-vscode",
+				"ionutvmi.path-autocomplete"
+			]
+		}
+	}
 
 	// Configure tool-specific properties.
 	// "customizations": {},
