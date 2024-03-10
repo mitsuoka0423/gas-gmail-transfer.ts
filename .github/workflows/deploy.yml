@@ -1,0 +1,49 @@
+name: Google Apps Script にデプロイ
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install Clasp
+        run: |
+          npm init -y
+          npm install clasp -g
+
+      - name: Create clasprc.json
+        run: |
+          echo '{ 
+            "token": {
+              "access_token": "${{ secrets.ACCESS_TOKEN }}",
+              "refresh_token": "${{ secrets.REFRESH_TOKEN }}",
+              "scope": "${{ secrets.SCOPE }}",
+              "token_type": "Bearer",
+              "id_token": "${{ secrets.ID_TOKEN }}",
+              "expiry_date": 1710033482876
+            },
+            "oauth2ClientSettings": {
+              "clientId": "${{ secrets.CLIENT_ID }}",
+              "clientSecret": "${{ secrets.CLIENT_SECRET }}",
+              "redirectUri": "http://localhost"
+            },
+            "isLocalCreds": false
+          }' > ~/.clasprc.json
+
+      - name: Deploy
+        run: |
+          clasp push
